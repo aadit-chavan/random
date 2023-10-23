@@ -19,3 +19,4 @@ while True:
 
     print(f"Model: {output_text}")
 
+
