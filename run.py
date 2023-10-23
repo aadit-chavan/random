@@ -10,9 +10,10 @@ model = model.to("cuda")
 
 while True:
     input_text = input("You: ")
-    input_ids = tokenizer.encode(input_text, return_tensors="pt").to("cuda")
+    prompt = f"Q: {input_text} A:"
+    input_ids = tokenizer.encode(prompt, return_tensors="pt").to("cuda")
 
-    output = model.generate(input_ids)
+    output = model.generate(input_ids, max_length=input_ids.shape[1] + 1024, pad_token_id=tokenizer.eos_token_id)
 
     output_text = tokenizer.decode(output[0], skip_special_tokens=True)
 
